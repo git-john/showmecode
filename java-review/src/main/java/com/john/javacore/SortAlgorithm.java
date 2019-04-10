@@ -5,6 +5,9 @@ import com.sun.istack.internal.NotNull;
 
 import java.util.Arrays;
 
+
+//参考：https://www.cnblogs.com/guoyaohua/p/8600214.html
+
 /**
  * 排序算法
  */
@@ -94,6 +97,7 @@ public class SortAlgorithm {
         return array;
     }
 
+    //--------- 归并排序start
     /**
      * 归并排序
      * @param array
@@ -124,13 +128,45 @@ public class SortAlgorithm {
         }
         return result;
     }
+    //--------- 归并排序end
 
+    //--------- 快速排序start
+    /**
+     * 快速排序，找一个基准数使得左边的都比他小，右边的都比他大
+     * @param array
+     * @return
+     */
+    public static void quickSort(int[] array){
+        qsort(array, 0, array.length-1);
+    }
+    private static void qsort(int[] arr, int low, int high){
+        if (low < high){
+            int pivot=partition(arr, low, high);        //将数组分为两部分
+            qsort(arr, low, pivot-1);                   //递归排序左子数组
+            qsort(arr, pivot+1, high);                  //递归排序右子数组
+        }
+    }
 
+    //填坑法
+    private static int partition(int[] arr, int low, int high){
+        int pivot = arr[low];     //枢轴记录
+        while (low<high){
+            while (low<high && arr[high]>=pivot) --high;
+            arr[low]=arr[high];             //交换比枢轴小的记录到左端
+            while (low<high && arr[low]<=pivot) ++low;
+            arr[high] = arr[low];           //交换比枢轴大的记录到右端
+        }
+        //扫描完成，枢轴到位
+        arr[low] = pivot;
+        //返回的是枢轴的位置
+        return low;
+    }
+    //--------- 快速排序end
 
     public static void main(String[] args) {
         int[] nums = new int[]{3,9,5,2,8,6,7,15,10};
-        int[] result = mergeSort(nums);
-        for(int i : result){
+        quickSort(nums);
+        for(int i : nums){
             System.out.printf("%d,", i);
         }
 
