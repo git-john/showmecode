@@ -3,6 +3,7 @@ package com.john.javacore;
 
 import com.sun.istack.internal.NotNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
@@ -262,9 +263,88 @@ public class SortAlgorithm {
         return arr;
     }
 
+    /**
+     * 桶排序
+     *
+     * @param array
+     * @param bucketSize
+     * @return
+     */
+    public static ArrayList<Integer> BucketSort(ArrayList<Integer> array, int bucketSize) {
+        if (array == null || array.size() < 2)
+            return array;
+        int max = array.get(0), min = array.get(0);
+        // 找到最大值最小值
+        for (int i = 0; i < array.size(); i++) {
+            if (array.get(i) > max)
+                max = array.get(i);
+            if (array.get(i) < min)
+                min = array.get(i);
+        }
+        int bucketCount = (max - min) / bucketSize + 1;
+        ArrayList<ArrayList<Integer>> bucketArr = new ArrayList<>(bucketCount);
+        ArrayList<Integer> resultArr = new ArrayList<>();
+        for (int i = 0; i < bucketCount; i++) {
+            bucketArr.add(new ArrayList<Integer>());
+        }
+        for (int i = 0; i < array.size(); i++) {
+            bucketArr.get((array.get(i) - min) / bucketSize).add(array.get(i));
+        }
+        for (int i = 0; i < bucketCount; i++) {
+            if (bucketSize == 1) { // 如果带排序数组中有重复数字时
+                for (int j = 0; j < bucketArr.get(i).size(); j++)
+                    resultArr.add(bucketArr.get(i).get(j));
+            } else {
+                if (bucketCount == 1)
+                    bucketSize--;
+                ArrayList<Integer> temp = BucketSort(bucketArr.get(i), bucketSize);
+                for (int j = 0; j < temp.size(); j++)
+                    resultArr.add(temp.get(j));
+            }
+        }
+        return resultArr;
+    }
+
+    /**
+     * 基数排序
+     * @param array
+     * @return
+     */
+    public static int[] RadixSort(int[] array) {
+        if (array == null || array.length < 2)
+            return array;
+        // 1.先算出最大数的位数；
+        int max = array[0];
+        for (int i = 1; i < array.length; i++) {
+            max = Math.max(max, array[i]);
+        }
+        int maxDigit = 0;
+        while (max != 0) {
+            max /= 10;
+            maxDigit++;
+        }
+        int mod = 10, div = 1;
+        ArrayList<ArrayList<Integer>> bucketList = new ArrayList<ArrayList<Integer>>();
+        for (int i = 0; i < 10; i++)
+            bucketList.add(new ArrayList<Integer>());
+        for (int i = 0; i < maxDigit; i++, mod *= 10, div *= 10) {
+            for (int j = 0; j < array.length; j++) {
+                int num = (array[j] % mod) / div;
+                bucketList.get(num).add(array[j]);
+            }
+            int index = 0;
+            for (int j = 0; j < bucketList.size(); j++) {
+                for (int k = 0; k < bucketList.get(j).size(); k++)
+                    array[index++] = bucketList.get(j).get(k);
+                bucketList.get(j).clear();
+            }
+        }
+        return array;
+    }
+
     public static void main(String[] args) {
-        int[] nums = new int[]{3,9,5,2,8,6,7,15,10};
-        nums = countSort();
+        int[] nums = new int[]{32,92,5,2,8,602,7,15,10};
+        nums = RadixSort(nums);
         for(int i : nums){
             System.out.printf("%d,", i);
         }
