@@ -35,10 +35,10 @@ public class BinarySearch {
         int right = arr.length -1;
         while (left<=right){
             int mid = (right + left)/2;
-            if(keyNumber >= arr[mid]){
-                left = mid + 1;
+            if(keyNumber <= arr[mid]){
+                right = mid - 1;
             }else {
-                right = mid -1;
+                left = mid + 1;
             }
         }
 
@@ -54,22 +54,22 @@ public class BinarySearch {
      */
     public static int binarySearch3(int[] arr, int keyNumber){
         int left = 0;
-        int right = arr.length -1;
+        int right = arr.length - 1;
         while (left<=right){
             int mid = (right + left)/2;
-            if(keyNumber <= arr[mid]){
+            if(keyNumber >= arr[mid]){
                 left = mid + 1;
             }else {
-                right = mid -1;
+                right = mid - 1;
             }
         }
 
-        if(right<arr.length && arr[right] == keyNumber) return right;
+        if(right>=0 && arr[right] == keyNumber) return right;
         return -1;
     }
 
     public static void main(String[] args) {
-        int[] arr = new int[]{1,2,2,3,4,5,7};
-        System.out.println(binarySearch3(arr,2));
+        int[] arr = new int[]{1,2,2,3,4,5,5,7};
+        System.out.println(binarySearch3(arr,5));
     }
 }
