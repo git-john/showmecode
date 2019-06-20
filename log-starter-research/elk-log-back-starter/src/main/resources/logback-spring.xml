@@ -4,6 +4,7 @@
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
 
     <springProperty scope="context" name="springAppName" source="spring.application.name" />
+    <springProperty scope="context" name="logFilePath" source="logback-file-path" />
 
     <!-- 日志在工程中的输出位置 -->
     <property name="LOG_FILE" value="${BUILD_FOLDER:-build}/${springAppName}" />
@@ -30,28 +31,9 @@
             <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>7</maxHistory>
         </rollingPolicy>
-        <encoder
-                class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-            <providers>
-                <timestamp>
-                    <timeZone>UTC</timeZone>
-                </timestamp>
-                <pattern>
-                    <pattern>
-                        {
-                        "severity": "%level",
-                        "service": "${springAppName:-}",
-                        "trace": "%X{X-B3-TraceId:-}",
-                        "span": "%X{X-B3-SpanId:-}",
-                        "exportable": "%X{X-Span-Export:-}",
-                        "pid": "${PID:-}",
-                        "thread": "%thread",
-                        "class": "%logger{40}",
-                        "message": "%message"
-                        }
-                    </pattern>
-                </pattern>
-            </providers>
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
         </encoder>
     </appender>
 
@@ -88,6 +70,7 @@
     <!-- 日志输出级别 -->
     <root level="INFO">
         <appender-ref ref="console" />
+        <appender-ref ref="flatfile" />
         <appender-ref ref="logstash" />
     </root>
 </configuration>
