@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @Author: kangq
  * @Date: 2019/6/20 18:52
@@ -19,4 +21,13 @@ public class IndexController {
         logger.info("============= hello world ============");
         return "hello world";
     }
+
+    @GetMapping("/helloAop")
+    public String helloAop(HttpServletRequest request){
+        logger.info("ldjkajfdla");
+        String name = request.getParameter("name");
+        String age = request.getParameter("age");
+        return "name is: " + name + " && age is : " + age;
+    }
+
 }
