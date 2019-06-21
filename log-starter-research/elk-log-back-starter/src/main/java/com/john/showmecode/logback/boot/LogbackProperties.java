@@ -1,5 +1,6 @@
 package com.john.showmecode.logback.boot;
 
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -8,15 +9,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 
 @ConfigurationProperties(prefix = "logback")
+@Data
 public class LogbackProperties {
 
-    private String logFilePath;
+    private String logHome;
 
-    public String getLogFilePath() {
-        return logFilePath;
-    }
+    private String logstashIp;
 
-    public void setLogFilePath(String logFilePath) {
-        this.logFilePath = logFilePath;
-    }
+    private String logstashPort;
 }

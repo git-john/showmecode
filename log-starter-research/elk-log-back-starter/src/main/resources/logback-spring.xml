@@ -4,10 +4,11 @@
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
 
     <springProperty scope="context" name="springAppName" source="spring.application.name" />
-    <springProperty scope="context" name="logFilePath" source="logback-file-path" />
-
-    <!-- 日志在工程中的输出位置 -->
-    <property name="LOG_FILE" value="${BUILD_FOLDER:-build}/${springAppName}" />
+    <property scope="context" name="PROJECT_NAME" value="${springAppName:-default-project}"/>
+    <springProperty scope="context" name="LOG_HOME_0" source="logback.log-home"/>
+    <property scope="context" name="LOG_HOME" value="${LOG_HOME_0:-/data/logs/}"/>
+    <springProperty scope="context" name="LOG_STASH_IP" source="logback.logstash-ip"/>
+    <springProperty scope="context" name="LOG_STASH_PORT" source="logback.logstash-port"/>
 
     <!-- 控制台的日志输出样式 -->
     <property name="CONSOLE_LOG_PATTERN" value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}" />
@@ -26,7 +27,7 @@
 
     <!-- Appender to log to file -->​
     <appender name="flatfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_FILE}</file>
+        <file>${LOG_HOME}/${PROJECT_NAME}.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>7</maxHistory>
@@ -40,7 +41,7 @@
     <!-- 为logstash输出的JSON格式的Appender -->
     <appender name="logstash"
               class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>127.0.0.1:5044</destination>
+        <destination>${LOG_STASH_IP}:${LOG_STASH_PORT}</destination>
         <!-- 日志输出编码 -->
         <encoder
                 class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">

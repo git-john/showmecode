@@ -10,4 +10,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableConfigurationProperties(LogbackProperties.class)
 public class LogAutoConfiguration {
+
+    private LogbackProperties logbackProperties;
 }
