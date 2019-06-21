@@ -1,3 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.john.showmecode.logback.boot.LogAutoConfiguration,\
-  com.john.showmecode.logback.boot.LogAdvice
+  com.john.showmecode.logback.boot.LogAutoConfiguration
