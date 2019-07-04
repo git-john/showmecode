@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,12 +20,6 @@ public class LoggerDecorator {
 
     private Logger logger;
 
-    @Autowired
-    private HttpServletRequest request;
-
-    @Autowired
-    private HttpServletResponse response;
-
     //TODO: ASYNC, request object
     //允许自定义request-id
 
@@ -37,7 +33,7 @@ public class LoggerDecorator {
         logger = LoggerFactory.getLogger(clazz);
     }
 
-    public LoggerDecorator getLogger(Class<?> clazz){
+    public static LoggerDecorator getLogger(Class<?> clazz){
         return new LoggerDecorator(clazz);
     }
 
@@ -141,11 +137,8 @@ public class LoggerDecorator {
         return logger.isInfoEnabled();
     }
 
-    public void setRequestId(String var1){
-        response.addHeader("requestId", "request-thread-1");
-    }
-
     public void info(String var1){
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         logger.info(var1);
     }
 

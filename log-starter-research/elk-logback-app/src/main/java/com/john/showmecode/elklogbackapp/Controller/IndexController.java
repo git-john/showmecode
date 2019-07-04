@@ -1,6 +1,7 @@
 package com.john.showmecode.elklogbackapp.Controller;
 
 import com.john.showmecode.elklogbackapp.service.HelloService;
+import com.john.showmecode.logback.LoggerDecorator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class IndexController {
     @Autowired
     HelloService helloService;
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private LoggerDecorator logger = LoggerDecorator.getLogger(this.getClass());
 
     @GetMapping("/helloworld")
     public String helloWorld(){

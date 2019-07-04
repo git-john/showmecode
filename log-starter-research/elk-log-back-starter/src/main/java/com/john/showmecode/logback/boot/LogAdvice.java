@@ -1,6 +1,7 @@
 package com.john.showmecode.logback.boot;
 
 import com.alibaba.fastjson.JSONObject;
+import com.john.showmecode.logback.LoggerDecorator;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -27,7 +28,7 @@ import java.util.Map;
 @Aspect
 public class LogAdvice {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private LoggerDecorator logger = LoggerDecorator.getLogger(this.getClass());
 
     private Boolean monitorStatus ;
 
@@ -103,8 +104,7 @@ public class LogAdvice {
 
             logger.info("请求参数："+sb);
             Object result = joinPoint.proceed();
-            JSONObject jsonObject = new JSONObject();
-            logger.info("请求结束，本次请求时间："+(System.currentTimeMillis()-start)+" && 返回值：" + jsonObject.toJSONString(result)+",请求编号"+start);
+            logger.info("请求结束，本次请求时间："+(System.currentTimeMillis()-start)+" && 返回值：" + JSONObject.toJSONString(result)+",请求编号"+start);
             return result;
         }else {
             return  joinPoint.proceed();
