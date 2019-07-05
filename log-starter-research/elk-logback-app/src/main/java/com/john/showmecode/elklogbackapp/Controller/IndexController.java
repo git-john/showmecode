@@ -2,8 +2,6 @@ package com.john.showmecode.elklogbackapp.Controller;
 
 import com.john.showmecode.elklogbackapp.service.HelloService;
 import com.john.showmecode.logback.LoggerDecorator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +22,7 @@ public class IndexController {
 
     @GetMapping("/helloworld")
     public String helloWorld(){
+        logger.setRequestId("[helloworld]");
         logger.info("============= hello world ============");
         return "hello world";
     }

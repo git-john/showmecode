@@ -72,7 +72,7 @@ public class LogAdvice {
             //请求编号记忆
             long start=System.currentTimeMillis();
             /* 打印请求地址及参数 */
-            logger.info("请求开始，请求地址："+request.getRequestURL()+",请求编号"+start);
+            logger.info("请求开始，请求地址："+request.getRequestURL());
             //类名  //方法名
             Class<?> aClass = joinPoint.getTarget().getClass();
             String name = joinPoint.getSignature().getName();
@@ -104,7 +104,7 @@ public class LogAdvice {
 
             logger.info("请求参数："+sb);
             Object result = joinPoint.proceed();
-            logger.info("请求结束，本次请求时间："+(System.currentTimeMillis()-start)+" && 返回值：" + JSONObject.toJSONString(result)+",请求编号"+start);
+            logger.info("请求结束，本次请求时间："+(System.currentTimeMillis()-start));
             return result;
         }else {
             return  joinPoint.proceed();

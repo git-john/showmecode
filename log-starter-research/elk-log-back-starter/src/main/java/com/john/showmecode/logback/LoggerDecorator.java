@@ -1,14 +1,16 @@
 package com.john.showmecode.logback;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * @Author: kangq
@@ -19,9 +21,6 @@ public class LoggerDecorator {
 //    Logger logger = LoggerFactory.getLogger(LoggerDecorator.class);
 
     private Logger logger;
-
-    //TODO: ASYNC, request object
-    //允许自定义request-id
 
 //    String message = "{'requestId':, message:,time:,uri:, serviceid:,serverip:,clientip:}";
 
@@ -35,6 +34,50 @@ public class LoggerDecorator {
 
     public static LoggerDecorator getLogger(Class<?> clazz){
         return new LoggerDecorator(clazz);
+    }
+
+    public void info(String var1){
+        String message = formatMessage(var1);
+        logger.info(message);
+    }
+
+    public void setRequestId(String requestId){
+        if(StringUtils.isEmpty(requestId)){
+            logger.warn("requestId cannot be empty");
+            return;
+        }
+
+
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        if(null == requestAttributes){
+            logger.warn("not a request, cannot set request id");
+            return;
+        }
+        HttpServletRequest request = ((ServletRequestAttributes)requestAttributes).getRequest();
+        MyRequestWrapper myRequestWrapper = (MyRequestWrapper) request;
+        myRequestWrapper.putHeader("requestId", requestId);
+    }
+
+    private String formatMessage(String var){
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        String requestId = "";
+        String uri = "";
+        if(null != requestAttributes){
+            HttpServletRequest request = ((ServletRequestAttributes)requestAttributes).getRequest();
+            MyRequestWrapper myRequestWrapper = (MyRequestWrapper) request;
+            if(StringUtils.isEmpty(myRequestWrapper.getHeader("requestId"))){
+                //如果为空，生成一个requestId并放入header
+                myRequestWrapper.putHeader("requestId", "request-"+System.currentTimeMillis());
+            }
+            uri = myRequestWrapper.getRequestURI();
+            requestId = myRequestWrapper.getHeader("requestId");
+
+        }
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("requestId", requestId);
+        jsonObject.put("uri", uri);
+        jsonObject.put("message", var);
+        return jsonObject.toJSONString();
     }
 
     public boolean isTraceEnabled(){
@@ -135,11 +178,6 @@ public class LoggerDecorator {
 
     public boolean isInfoEnabled(){
         return logger.isInfoEnabled();
-    }
-
-    public void info(String var1){
-        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-        logger.info(var1);
     }
 
     public void info(String var1, Object var2){
