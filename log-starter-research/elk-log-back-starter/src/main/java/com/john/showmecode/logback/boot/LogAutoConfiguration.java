@@ -25,11 +25,11 @@ public class LogAutoConfiguration {
      * 加入自定义filter， 使得requestWrapper可用
      * @return
      */
-    @Bean
-    public FilterRegistrationBean loggerFilter(){
-        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
-        filterRegistrationBean.addUrlPatterns("/*");
-        filterRegistrationBean.setFilter(new LoggerFilter());
-        return filterRegistrationBean;
-    }
+//    @Bean
+//    public FilterRegistrationBean loggerFilter(){
+//        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+//        filterRegistrationBean.addUrlPatterns("/*");
+//        filterRegistrationBean.setFilter(new LoggerFilter());
+//        return filterRegistrationBean;
+//    }
 }

@@ -1,6 +1,5 @@
 package com.john.showmecode.logback;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,42 +41,24 @@ public class LoggerDecorator {
     }
 
     public void setRequestId(String requestId){
-        if(StringUtils.isEmpty(requestId)){
-            logger.warn("requestId cannot be empty");
-            return;
-        }
-
-
-        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-        if(null == requestAttributes){
-            logger.warn("not a request, cannot set request id");
-            return;
-        }
-        HttpServletRequest request = ((ServletRequestAttributes)requestAttributes).getRequest();
-        MyRequestWrapper myRequestWrapper = (MyRequestWrapper) request;
-        myRequestWrapper.putHeader("requestId", requestId);
+//        if(StringUtils.isEmpty(requestId)){
+//            logger.warn("requestId cannot be empty");
+//            return;
+//        }
+//
+//
+//        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+//        if(null == requestAttributes){
+//            logger.warn("not a request, cannot set request id");
+//            return;
+//        }
+//        HttpServletRequest request = ((ServletRequestAttributes)requestAttributes).getRequest();
+//        MyRequestWrapper myRequestWrapper = (MyRequestWrapper) request;
+//        myRequestWrapper.putHeader("requestId", requestId);
     }
 
     private String formatMessage(String var){
-        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-        String requestId = "";
-        String uri = "";
-        if(null != requestAttributes){
-            HttpServletRequest request = ((ServletRequestAttributes)requestAttributes).getRequest();
-            MyRequestWrapper myRequestWrapper = (MyRequestWrapper) request;
-            if(StringUtils.isEmpty(myRequestWrapper.getHeader("requestId"))){
-                //如果为空，生成一个requestId并放入header
-                myRequestWrapper.putHeader("requestId", "request-"+System.currentTimeMillis());
-            }
-            uri = myRequestWrapper.getRequestURI();
-            requestId = myRequestWrapper.getHeader("requestId");
-
-        }
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("requestId", requestId);
-        jsonObject.put("uri", uri);
-        jsonObject.put("message", var);
-        return jsonObject.toJSONString();
+        return var;
     }
 
     public boolean isTraceEnabled(){

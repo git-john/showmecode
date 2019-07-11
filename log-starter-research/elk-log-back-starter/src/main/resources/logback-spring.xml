@@ -9,6 +9,7 @@
     <property scope="context" name="LOG_HOME" value="${LOG_HOME_0:-/data/logs/}"/>
     <springProperty scope="context" name="LOG_STASH_IP" source="logback.logstash-ip"/>
     <springProperty scope="context" name="LOG_STASH_PORT" source="logback.logstash-port"/>
+    <property name="LOG_LEVEL_PATTERN" value="%X{traceId:-} %5p"/>
 
     <!-- 控制台的日志输出样式 -->
     <property name="CONSOLE_LOG_PATTERN" value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}" />
@@ -19,9 +20,28 @@
             <level>INFO</level>
         </filter>
         <!-- 日志输出编码 -->
-        <encoder>
-            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
-            <charset>utf8</charset>
+        <encoder
+                class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp>
+                    <timeZone>UTC</timeZone>
+                </timestamp>
+                <pattern>
+                    <pattern>
+                        {
+                        "severity": "%level",
+                        "service": "${springAppName:-}",
+                        "trace": "%X{X-B3-TraceId:-}",
+                        "span": "%X{X-B3-SpanId:-}",
+                        "exportable": "%X{X-Span-Export:-}",
+                        "pid": "${PID:-}",
+                        "thread": "%thread",
+                        "class": "%logger{40}",
+                        "message": "%message"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
         </encoder>
     </appender>
 

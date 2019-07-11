@@ -1,29 +1,28 @@
 package com.john.showmecode.logback;
 
+import com.john.showmecode.logback.util.TraceUtil;
+import org.springframework.web.filter.OncePerRequestFilter;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
  * @Author: kangq
  * @Date: 2019/7/5 10:15
  */
-public class LoggerFilter implements Filter {
+public class LoggerFilter extends OncePerRequestFilter {
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
+                                    FilterChain filterChain) throws ServletException, IOException {
+        try {
+            TraceUtil.traceStart();
 
-    }
-
-    @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-        MyRequestWrapper myRequestWrapper = new MyRequestWrapper(httpServletRequest);
-        filterChain.doFilter(myRequestWrapper, servletResponse);
-    }
-
-    @Override
-    public void destroy() {
-
+            filterChain.doFilter(request, response);
+        } finally {
+            TraceUtil.traceEnd();
+        }
     }
 }
