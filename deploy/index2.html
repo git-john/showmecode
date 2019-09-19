@@ -23,7 +23,6 @@ Purchase: http://wrapbootstrap.com
 
     <!--Beyond styles-->
     <link id="beyond-link" href="assets/css/beyond.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/bootstrap-step/css/bs-is-fun.css" rel="stylesheet" />
     <link href="assets/css/demo.min.css" rel="stylesheet" />
     <link href="assets/css/typicons.min.css" rel="stylesheet" />
     <link href="assets/css/animate.min.css" rel="stylesheet" />
@@ -181,73 +180,33 @@ Purchase: http://wrapbootstrap.com
                             ×
                         </button>
                         <i class="fa-fw fa fa-info"></i>
-                        <strong>注意：</strong> 您尚未进行任何备案，请先完成备案！
+                        <strong>注意：</strong> 您尚未进行任何备案，请按步骤导航完成备案！
                     </div>
 
-                    <div class="widget">
-                        <div class="widget-header bordered-bottom bordered-red">
-                            <span class="widget-caption">备案导航</span>
-                        </div>
-                        <div class="widget-body" id="myModalNext">
-                            <ul class="nav nav-pills nav-justified step step-progress">
-                                <li class="active">
-                                    <a>配置数据源<span class="caret"></span></a>
-                                </li>
-                                <li>
-                                    <a>发布注册中心<span class="caret"></span></a>
-                                </li>
-                                <li>
-                                    <a>发布备案服务<span class="caret"></span></a>
-                                </li>
-                                <li>
-                                    <a>备案登记<span class="caret"></span></a>
-                                </li>
-                                <li>
-                                    <a>在线激活<span class="caret"></span></a>
-                                </li>
-                            </ul>
-
-                            <div class="carousel slide" data-ride="carousel" data-interval="false" data-wrap="false">
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="item active">
-                                        <p>配置数据源</p>
-                                        <div class="col-xs-2">
-                                            配置角色
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <input type="text" class="form-control" />
-                                        </div>
-                                        <div class=" col-xs-4">
-                                            <button type="button" class=" btn btn-primary">保存</button>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <p>发布注册中心</p>
-                                        <div class="col-xs-2">
-                                            配置用户
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <input type="text" class="form-control" />
-                                        </div>
-                                        <div class=" col-xs-4">
-                                            <button type="button" class=" btn btn-primary">保存</button>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <p>发布备案服务</p>
-                                    </div>
-                                    <div class="item">
-                                        <p>备案登记</p>
-                                    </div>
-                                    <div class="item">
-                                        <p>在线激活</p>
-                                    </div>
-                                </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div id="simplewizard" class="wizard" data-target="#simplewizard-steps">
+                                <ul class="steps">
+                                    <li data-target="#simplewizardstep1" class="active"><span class="step">1</span>Step 1<span class="chevron"></span></li>
+                                    <li data-target="#simplewizardstep2" class=""><span class="step">2</span>Step 2<span class="chevron"></span></li>
+                                    <li data-target="#simplewizardstep3" class=""><span class="step">3</span>Step 3<span class="chevron"></span></li>
+                                    <li data-target="#simplewizardstep4" class=""><span class="step">4</span>Step 4<span class="chevron"></span></li>
+                                    <li data-target="#simplewizardstep5" class=""><span class="step">5</span>Step 5<span class="chevron"></span></li>
+                                </ul>
                             </div>
+                            <div class="step-content" id="simplewizard-steps">
+                                <div class="step-pane active" id="simplewizardstep1">This is step 1</div>
+                                <div class="step-pane" id="simplewizardstep2">This is step 2</div>
+                                <div class="step-pane" id="simplewizardstep3">This is step 3</div>
+                                <div class="step-pane" id="simplewizardstep4">This is step 4</div>
+                                <div class="step-pane" id="simplewizardstep5">This is step 5</div>
+                            </div>
+                            <div class="actions actions-footer" id="simplewizard-actions">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-sm btn-prev" disabled="disabled"> <i class="fa fa-angle-left"></i>上一步</button>
+                                    <button type="button" class="btn btn-primary btn-sm btn-next" data-last="完成">下一步<i class="fa fa-angle-right"></i></button>
+                                </div>
 
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default MN-pre">上一步</button>
-                                <button type="button" class="btn btn-primary MN-next">下一步</button>
                             </div>
                         </div>
                     </div>
@@ -264,44 +223,24 @@ Purchase: http://wrapbootstrap.com
     <!--Basic Scripts-->
     <script src="assets/js/jquery-2.0.3.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/bootstrap-step/js/brush.js"></script>
 
     <!--Beyond Scripts-->
     <script src="assets/js/beyond.min.js"></script>
 
-
     <!--Page Related Scripts-->
-    <!--Sparkline Charts Needed Scripts-->
-    <script src="assets/js/charts/sparkline/jquery.sparkline.js"></script>
-    <script src="assets/js/charts/sparkline/sparkline-init.js"></script>
+    <script src="assets/js/fuelux/wizard/wizard-custom.js"></script>
+    <script src="assets/js/toastr/toastr.js"></script>
 
-    <!--Easy Pie Charts Needed Scripts-->
-    <script src="assets/js/charts/easypiechart/jquery.easypiechart.js"></script>
-    <script src="assets/js/charts/easypiechart/easypiechart-init.js"></script>
-
-    <!--Flot Charts Needed Scripts-->
-    <script src="assets/js/charts/flot/jquery.flot.js"></script>
-    <script src="assets/js/charts/flot/jquery.flot.resize.js"></script>
-    <script src="assets/js/charts/flot/jquery.flot.pie.js"></script>
-    <script src="assets/js/charts/flot/jquery.flot.tooltip.js"></script>
-    <script src="assets/js/charts/flot/jquery.flot.orderBars.js"></script>
-
-    <script>
-        $("#myModalNext .modal-footer button").each(function () {
-            $(this).click(function () {
-                if ($(this).hasClass("MN-next")) {
-                    $("#myModalNext .carousel").carousel('next');
-                    $("#myModalNext .step li.active").next().addClass("active");
-                } else {
-                    $("#myModalNext .carousel").carousel('prev');
-                    if ($("#myModalNext .step li").length > 1) {
-                        $($($("#myModalNext .step li.active"))[$("#myModalNext .step li.active").length - 1]).removeClass("active")
-                    }
-                }
-            })
-        })
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $('#simplewizardinwidget').wizard();
+            $('#simplewizard').wizard();
+            $('#tabbedwizard').wizard().on('finished', function (e) {
+                alert("恭喜你已完成备案");
+            });
+            $('#WiredWizard').wizard();
+        });
     </script>
-
 </body>
 <!--  /Body -->
 </html>
