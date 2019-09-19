@@ -92,10 +92,16 @@ Purchase: http://wrapbootstrap.com
                     <li class="active">
                         <a href="index2.html">
                             <i class="menu-icon fa fa-book"></i>
-                            <span class="menu-text"> 备案管理 </span>
+                            <span class="menu-text"> 备案管理（未备案情况） </span>
                         </a>
                     </li>
 
+                    <li>
+                        <a href="config.html">
+                            <i class="menu-icon fa fa-book"></i>
+                            <span class="menu-text"> 配置项管理 </span>
+                        </a>
+                    </li>
                     <!--UI Elements-->
                     <li class="open">
                         <a href="#" class="menu-dropdown">
@@ -187,19 +193,196 @@ Purchase: http://wrapbootstrap.com
                         <div class="col-lg-12 col-sm-12 col-xs-12">
                             <div id="simplewizard" class="wizard" data-target="#simplewizard-steps">
                                 <ul class="steps">
-                                    <li data-target="#simplewizardstep1" class="active"><span class="step">1</span>Step 1<span class="chevron"></span></li>
-                                    <li data-target="#simplewizardstep2" class=""><span class="step">2</span>Step 2<span class="chevron"></span></li>
-                                    <li data-target="#simplewizardstep3" class=""><span class="step">3</span>Step 3<span class="chevron"></span></li>
-                                    <li data-target="#simplewizardstep4" class=""><span class="step">4</span>Step 4<span class="chevron"></span></li>
-                                    <li data-target="#simplewizardstep5" class=""><span class="step">5</span>Step 5<span class="chevron"></span></li>
+                                    <li data-target="#simplewizardstep1" class="active"><span class="step">1</span>配置数据源<span class="chevron"></span></li>
+                                    <li data-target="#simplewizardstep2" class=""><span class="step">2</span>发布注册中心<span class="chevron"></span></li>
+                                    <li data-target="#simplewizardstep3" class=""><span class="step">3</span>发布备案服务<span class="chevron"></span></li>
+                                    <li data-target="#simplewizardstep4" class=""><span class="step">4</span>备案登记<span class="chevron"></span></li>
+                                    <li data-target="#simplewizardstep5" class=""><span class="step">5</span>在线激活<span class="chevron"></span></li>
                                 </ul>
                             </div>
                             <div class="step-content" id="simplewizard-steps">
-                                <div class="step-pane active" id="simplewizardstep1">This is step 1</div>
-                                <div class="step-pane" id="simplewizardstep2">This is step 2</div>
-                                <div class="step-pane" id="simplewizardstep3">This is step 3</div>
-                                <div class="step-pane" id="simplewizardstep4">This is step 4</div>
-                                <div class="step-pane" id="simplewizardstep5">This is step 5</div>
+                                <div class="step-pane active" id="simplewizardstep1">
+
+                                    <div class="padding-top-20">
+                                        <form class="form-horizontal">
+                                            <div class="form-group">
+                                                <label for="inputEmail3" class="col-sm-2 control-label no-padding-right">数据库地址</label>
+                                                <div class="col-sm-8">
+                                                    <input type="email" class="form-control" id="inputEmail3" placeholder="请输入数据库地址 格式：jdbc:oracle:thin:@172.100.1.101:gzk">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputEmail3" class="col-sm-2 control-label no-padding-right">用户名</label>
+                                                <div class="col-sm-8">
+                                                    <input type="email" class="form-control" id="username" placeholder="请输入数据库登录用户名">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputEmail3" class="col-sm-2 control-label no-padding-right">密码</label>
+                                                <div class="col-sm-8">
+                                                    <input type="email" class="form-control" id="password" placeholder="请输入数据库登录密码">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="button" class="btn btn-blue">连接测试</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="step-pane" id="simplewizardstep2">
+                                    <div class="padding-top-20">
+
+                                        <form class="form-horizontal">
+                                            <div class="form-group">
+                                                <label for="e2" class="col-sm-2 control-label no-padding-right">选择服务器</label>
+                                                <div class="col-sm-8">
+                                                    <select id="e1" multiple="multiple" style="width: 100%;;">
+                                                        <option value="172.100.1.201" />172.100.1.201
+                                                        <option value="172.100.1.202" />172.100.1.202
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <button type="button" class="btn btn-danger">没有服务器</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="port" class="col-sm-2 control-label no-padding-right">设置端口号</label>
+                                                <div class="col-sm-8">
+                                                    <input type="email" class="form-control" id="port" value="8090">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="e2" class="col-sm-2 control-label no-padding-right">上传jar包</label>
+                                                <div class="col-sm-8">
+                                                    <input type="file">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="button" class="btn btn-blue">一键启动</button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                                <div class="step-pane" id="simplewizardstep3">
+                                    <div class="padding-top-20">
+                                        <form class="form-horizontal">
+                                            <div class="form-group">
+                                                <label for="e2" class="col-sm-2 control-label no-padding-right">选择服务器</label>
+                                                <div class="col-sm-8">
+                                                    <select id="e2" multiple="multiple" style="width: 100%;;">
+                                                        <option value="172.100.1.201" />172.100.1.201
+                                                        <option value="172.100.1.202" />172.100.1.202
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <button type="button" class="btn btn-danger">没有服务器</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="port2" class="col-sm-2 control-label no-padding-right">设置端口号</label>
+                                                <div class="col-sm-8">
+                                                    <input type="email" class="form-control" id="port2" value="8090">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="e2" class="col-sm-2 control-label no-padding-right">上传jar包</label>
+                                                <div class="col-sm-8">
+                                                    <input type="file">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="button" class="btn btn-blue">一键启动</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="step-pane" id="simplewizardstep4">
+
+                                    <div class="padding-top-20">
+                                        <form role="form">
+                                            <div class="form-title">系統信息</div>
+                                            <div class="form-group">
+                                                <label>填写发证机关</label>
+                                                <input type="text" class="form-control" id="fzjg" placeholder="请填写发证机关，多个发证机关以#隔开">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>选择系统类别</label>
+                                                        <select id="xtlb" style="width: 100%;">
+                                                            <option value="1001">综合平台</option>
+                                                            <option value="1002">监管平台</option>
+                                                            <option value="1002">驾照平台</option>
+                                                            <option value="1002">XX平台</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>安装点名称</label>
+                                                        <input type="text" class="form-control" id="azdmc" placeholder="安装点名称">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-title">用户信息</div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>用户名</label>
+                                                        <input type="text" class="form-control" id="yhm" placeholder="输入用户名">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>密码</label>
+                                                        <input type="password" class="form-control" id="mm" placeholder="输入密码">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>联系手机</label>
+                                                        <input type="text" class="form-control" id="lxsj" placeholder="输入联系手机">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>身份证</label>
+                                                        <input type="text" class="form-control" id="sfz" placeholder="输入身份证">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-title">加盖公章申请表</div>
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <label>加盖公章申请表</label>
+                                                    <input type="file" class="form-control" id="sqb" style="width:50%;">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="step-pane" id="simplewizardstep5">
+                                </div>
                             </div>
                             <div class="actions actions-footer" id="simplewizard-actions">
                                 <div class="btn-group">
@@ -228,6 +411,7 @@ Purchase: http://wrapbootstrap.com
     <script src="assets/js/beyond.min.js"></script>
 
     <!--Page Related Scripts-->
+    <script src="assets/js/select2/select2.js"></script>
     <script src="assets/js/fuelux/wizard/wizard-custom.js"></script>
     <script src="assets/js/toastr/toastr.js"></script>
 
@@ -240,6 +424,18 @@ Purchase: http://wrapbootstrap.com
             });
             $('#WiredWizard').wizard();
         });
+
+        $("#e1").select2({
+            placeholder: "选择服务器",
+            allowClear: true
+        });
+
+        $("#e2").select2({
+            placeholder: "选择服务器",
+            allowClear: true
+        });
+
+        $("#xtlb").select2();
     </script>
 </body>
 <!--  /Body -->
