@@ -5,19 +5,9 @@ var InitiateSimpleDataTable = function () {
             var oTable = $('#simpledatatable').dataTable({
                 "sDom": "Tflt<'row DTTTFooter'<'col-sm-6'i><'col-sm-6'p>>",
                 "iDisplayLength": 5,
-                "oTableTools": {
-                    "aButtons": [
-                        "copy", "csv", "xls", "pdf", "print"
-                    ],
-                    "sSwfPath": "assets/swf/copy_csv_xls_pdf.swf"
-                },
                 "language": {
                     "search": "",
                     "sLengthMenu": "_MENU_",
-                    "oPaginate": {
-                        "sPrevious": "Prev",
-                        "sNext": "Next"
-                    }
                 },
                 "aoColumns": [
                   { "bSortable": false },
@@ -28,26 +18,6 @@ var InitiateSimpleDataTable = function () {
                 ],
                 "aaSorting": []
             });
-
-            //Check All Functionality
-            jQuery('#simpledatatable .group-checkable').change(function () {
-                var set = $(".checkboxes");
-                var checked = jQuery(this).is(":checked");
-                jQuery(set).each(function () {
-                    if (checked) {
-                        $(this).prop("checked", true);
-                        $(this).parents('tr').addClass("active");
-                    } else {
-                        $(this).prop("checked", false);
-                        $(this).parents('tr').removeClass("active");
-                    }
-                });
-
-            });
-            jQuery('#simpledatatable tbody tr .checkboxes').change(function () {
-                $(this).parents('tr').toggleClass("active");
-            });
-
         }
 
     };
