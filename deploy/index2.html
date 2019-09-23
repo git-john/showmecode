@@ -144,8 +144,8 @@ Purchase: http://wrapbootstrap.com
                             <div id="simplewizard" class="wizard" data-target="#simplewizard-steps">
                                 <ul class="steps">
                                     <li data-target="#simplewizardstep1" class="active"><span class="step">1</span>配置数据源<span class="chevron"></span></li>
-                                    <li data-target="#simplewizardstep2" class=""><span class="step">2</span>发布注册中心<span class="chevron"></span></li>
-                                    <li data-target="#simplewizardstep3" class=""><span class="step">3</span>发布备案服务<span class="chevron"></span></li>
+                                    <li data-target="#simplewizardstep2" class=""><span class="step">2</span>配置FTP服务器<span class="chevron"></span></li>
+                                    <li data-target="#simplewizardstep3" class=""><span class="step">3</span>发布服务<span class="chevron"></span></li>
                                     <li data-target="#simplewizardstep4" class=""><span class="step">4</span>备案登记<span class="chevron"></span></li>
                                     <li data-target="#simplewizardstep5" class=""><span class="step">5</span>在线激活<span class="chevron"></span></li>
                                 </ul>
@@ -189,35 +189,29 @@ Purchase: http://wrapbootstrap.com
 
                                         <form class="form-horizontal">
                                             <div class="form-group">
-                                                <label for="e2" class="col-sm-2 control-label no-padding-right">选择服务器</label>
+                                                <label for="port2" class="col-sm-2 control-label no-padding-right">FTP服务器IP</label>
                                                 <div class="col-sm-8">
-                                                    <select id="e1" multiple="multiple" style="width: 100%;;">
-                                                        <option value="172.100.1.201" />172.100.1.201
-                                                        <option value="172.100.1.202" />172.100.1.202
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-1">
-                                                    <button type="button" class="btn btn-danger">添加服务器</button>
+                                                    <input type="email" class="form-control" id="ftp_ip" value="8090">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="port" class="col-sm-2 control-label no-padding-right">设置端口号</label>
+                                                <label for="port2" class="col-sm-2 control-label no-padding-right">用户名</label>
                                                 <div class="col-sm-8">
-                                                    <input type="email" class="form-control" id="port" value="8090">
+                                                    <input type="text" class="form-control" id="ftp_user" value="8090">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="e2" class="col-sm-2 control-label no-padding-right">上传jar包</label>
+                                                <label for="port2" class="col-sm-2 control-label no-padding-right">密码</label>
                                                 <div class="col-sm-8">
-                                                    <input type="file">
+                                                    <input type="password" class="form-control" id="ftp_password" value="8090">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="button" class="btn btn-blue">一键启动</button>
+                                                    <button type="button" class="btn btn-blue">连接测试</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -228,29 +222,49 @@ Purchase: http://wrapbootstrap.com
                                     <div class="padding-top-20">
                                         <form class="form-horizontal">
                                             <div class="form-group">
-                                                <label for="e2" class="col-sm-2 control-label no-padding-right">选择服务器</label>
+                                                <label for="sship" class="col-sm-2 control-label no-padding-right">服务器IP</label>
                                                 <div class="col-sm-8">
-                                                    <select id="e2" multiple="multiple" style="width: 100%;;">
-                                                        <option value="172.100.1.201" />172.100.1.201
-                                                        <option value="172.100.1.202" />172.100.1.202
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-1">
-                                                    <button type="button" class="btn btn-danger">添加服务器</button>
+                                                    <input type="email" class="form-control" id="sship">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="port2" class="col-sm-2 control-label no-padding-right">设置端口号</label>
+                                                <label for="sship" class="col-sm-2 control-label no-padding-right">SSH用户名</label>
+                                                <div class="col-sm-8">
+                                                    <input type="email" class="form-control" id="sshuser">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="sship" class="col-sm-2 control-label no-padding-right">SSH密码</label>
+                                                <div class="col-sm-8">
+                                                    <input type="email" class="form-control" id="sshpassword">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label no-padding-right">上传注册中心jar包</label>
+                                                <div class="col-sm-8">
+                                                    <input type="file">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="port2" class="col-sm-2 control-label no-padding-right">注册中心端口号</label>
                                                 <div class="col-sm-8">
                                                     <input type="email" class="form-control" id="port2" value="8090">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="e2" class="col-sm-2 control-label no-padding-right">上传jar包</label>
+                                                <label class="col-sm-2 control-label no-padding-right">上传备案服务jar包</label>
                                                 <div class="col-sm-8">
                                                     <input type="file">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="port2" class="col-sm-2 control-label no-padding-right">备案服务端口号</label>
+                                                <div class="col-sm-8">
+                                                    <input type="email" class="form-control" id="port3" value="8091">
                                                 </div>
                                             </div>
 
